@@ -29,9 +29,9 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 		this.cellsPerRow = cpr;
 
 		// 2. Calculate the cell size.
-		cellSize = w * h;
+		cellSize = h/cellsPerRow;
 		// 3. Initialize the cell array to the appropriate size.
-		cell = new Cell[WIDTH][HEIGHT];
+		cell = new Cell[ConwaysGameOfLife.WIDTH][ConwaysGameOfLife.HEIGHT];
 		// 3. Iterate through the array and initialize each cell.
 		// Don't forget to consider the cell's dimensions when
 		// passing in the location.
@@ -43,12 +43,12 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 	}
 
 	public void randomizeCells() {
-		//4. Iterate through each cell and randomly set each
-		//   cell's isAlive member to true or false
-		Random r=new Random();
+		// 4. Iterate through each cell and randomly set each
+		// cell's isAlive member to true or false
+		Random r = new Random();
 		for (int i = 0; i < cell.length; i++) {
 			for (int j = 0; j < cell[i].length; j++) {
-			cell[i][j].isAlive=r.nextBoolean();
+				cell[i][j].isAlive = r.nextBoolean();
 			}
 		}
 		repaint();
@@ -58,7 +58,7 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 		// 5. Iterate through the cells and set them all to dead.
 		for (int i = 0; i < cell.length; i++) {
 			for (int j = 0; j < cell[i].length; j++) {
-				cell[i][j].isAlive=false;
+				cell[i][j].isAlive = false;
 			}
 		}
 		repaint();
@@ -79,72 +79,87 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 	@Override
 	public void paintComponent(Graphics g) {
 		// 6. Iterate through the cells and draw them all
-for (int i = 0; i < cell.length; i++) {
-	for (int j = 0; j < cell[i].length; j++) {
-		cell[i][j].draw(g);
-	}
-}
+		
+		for (int i = 0; i < cell.length; i++) {
+			for (int j = 0; j < cell[i].length; j++) {
+				cell[i][j].draw(g);
+				System.out.println("h");
+			}
+		}
 		// draws grid
 		g.setColor(Color.BLACK);
 		g.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
+		
+		
 	}
 
 	// advances world one step
 	public void step() {
 		// 7. iterate through cells and fill in the livingNeighbors array
 		// . using the getLivingNeighbors method.
-		int[][] livingNeighbors = new int[cellsPerRow][cellsPerRow];
+		int[][] livingNeighbors = new int[cell.length][cell.length];
 		for (int i = 0; i < cell.length; i++) {
 			for (int j = 0; j < cell[i].length; j++) {
-				livingNeighbors[i][j]=getLivingNeighbors(i, j);
-		
-		// 8. check if each cell should live or die
-cell[i][j].liveOrDie(livingNeighbors[i][j]);
-}
-	}	repaint();
+				livingNeighbors[i][j] = getLivingNeighbors(i, j);
+
+				// 8. check if each cell should live or die
+				cell[i][j].liveOrDie(livingNeighbors[i][j]);
+			}
+		}
+		repaint();
 	}
 
 	// 9. Complete the method.
 	// It returns an int of 8 or less based on how many
 	// living neighbors there are of the
 	// cell identified by x and y
-	int livingNum=0;
+	int livingNum = 0;
+
 	public int getLivingNeighbors(int x, int y) {
-		if (x>0 && y>0) {
-			cell[x][y].isAlive=true;
-			livingNum+=1;
+		if (x > 0 && y > 0) {
+			if (cell[x][y].isAlive == true) {
+				livingNum += 1;
+			}
 		}
-		if (x-1>0 && y-1>0) {
-			cell[x-1][y-1].isAlive=true;
-			livingNum+=1;
+		if (x - 1 > 0 && y - 1 > 0) {
+			if (cell[x - 1][y - 1].isAlive == true) {
+				livingNum += 1;
+			}
 		}
-		if (x-1>0 && y>0) {
-			cell[x-1][y].isAlive=true;
-			livingNum+=1;
+		if (x - 1 > 0 && y > 0) {
+			if (cell[x - 1][y].isAlive == true) {
+				livingNum += 1;
+			}
 		}
-		if (x>0 && y-1>0) {
-			cell[x][y-1].isAlive=true;
-			livingNum+=1;
+		if (x > 0 && y - 1 > 0) {
+			if (cell[x][y - 1].isAlive == true) {
+				livingNum += 1;
+			}
 		}
-		if (x+1<cellsPerRow && y-1>0) {
-			cell[x+1][y-1].isAlive=true;
-			livingNum+=1;
+		if (x + 1 < cellsPerRow && y - 1 > 0) {
+			if (cell[x + 1][y - 1].isAlive == true) {
+				livingNum += 1;
+			}
 		}
-		if (x+1<cellsPerRow && y>0) {
-			cell[x+1][y].isAlive=true;
-			livingNum+=1;
+		if (x + 1 < cellsPerRow && y > 0) {
+			if (cell[x + 1][y].isAlive == true) {
+				livingNum += 1;
+			}
 		}
-		if (x>0 && y+1<cell.length-1) {
-			cell[x][y+1].isAlive=true;
-			livingNum+=1;
+		if (x > 0 && y + 1 < cell.length - 1) {
+			if (cell[x][y + 1].isAlive == true) {
+				livingNum += 1;
+			}
 		}
-		if (x+1<cellsPerRow && y+1<cell.length-1) {
-		cell[x+1][y+1].isAlive=true;
-		livingNum+=1;
+		if (x + 1 < cellsPerRow && y + 1 < cell.length - 1) {
+			if (cell[x + 1][y + 1].isAlive == true) {
+				livingNum += 1;
+			}
 		}
-		if (x-1>0 && y+1<cell.length) {
-			cell[x-1][y+1].isAlive=true;
-			livingNum+=1;
+		if (x - 1 > 0 && y + 1 < cell.length - 1) {
+			if (cell[x - 1][y + 1].isAlive == true) {
+				livingNum += 1;
+			}
 		}
 		System.out.println(livingNum);
 		return livingNum;
@@ -174,7 +189,7 @@ cell[i][j].liveOrDie(livingNeighbors[i][j]);
 		// the isAlive variable for that cell.
 		e.getX();
 		e.getY();
-		cell[e.getX()][e.getY()].isAlive=!cell[e.getX()][e.getY()].isAlive;
+		cell[e.getX()][e.getY()].isAlive = !cell[e.getX()][e.getY()].isAlive;
 		repaint();
 	}
 
