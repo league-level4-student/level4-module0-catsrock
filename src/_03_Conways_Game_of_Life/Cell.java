@@ -22,9 +22,12 @@ public class Cell implements Drawable {
 	// the rules of the game
 	/*
 	 * 1. Any live cell with fewer than two live neighbors dies, as if caused by
-	 * under population. 2. Any live cell with two or three live neighbors lives on
-	 * to the next generation. 3. Any live cell with more than three live neighbors
-	 * dies, as if by over population. 4. Any dead cell with exactly three live
+	 * under population. 
+	 * 2. Any live cell with two or three live neighbors lives on
+	 * to the next generation. 
+	 * 3. Any live cell with more than three live neighbors
+	 * dies, as if by over population. 
+	 * 4. Any dead cell with exactly three live
 	 * neighbors becomes a live cell, as if by reproduction. (source: Wikipedia)
 	 */
 	public void liveOrDie(int numNeighbors) {
@@ -54,14 +57,14 @@ public class Cell implements Drawable {
 	public void draw(Graphics g) {
 		if (isAlive == true) {
 			g.setColor(Color.blue);
-			g.fillRect(x, y, x, y);
+			g.fillRect(x, y, cellSize, cellSize);
 		} else {
 			g.setColor(Color.gray);
-			g.fillRect(x, y, x, y);
+			g.fillRect(x, y, cellSize, cellSize);
 		}
 		
 		g.setColor(Color.black);
-		g.drawRect(x, y, x, y);
+		g.drawRect(x, y, cellSize, cellSize);
 
 	}
 }

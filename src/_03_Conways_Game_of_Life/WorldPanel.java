@@ -29,7 +29,7 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 		this.cellsPerRow = cpr;
 
 		// 2. Calculate the cell size.
-		cellSize = h/cellsPerRow;
+		cellSize = h / cellsPerRow;
 		// 3. Initialize the cell array to the appropriate size.
 		cell = new Cell[ConwaysGameOfLife.WIDTH][ConwaysGameOfLife.HEIGHT];
 		// 3. Iterate through the array and initialize each cell.
@@ -37,7 +37,7 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 		// passing in the location.
 		for (int i = 0; i < cell.length; i++) {
 			for (int j = 0; j < cell[i].length; j++) {
-				cell[i][j] = new Cell(i, j, cellSize);
+				cell[i][j] = new Cell(i * cellSize, j * cellSize, cellSize);
 			}
 		}
 	}
@@ -79,18 +79,16 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 	@Override
 	public void paintComponent(Graphics g) {
 		// 6. Iterate through the cells and draw them all
-		
+
 		for (int i = 0; i < cell.length; i++) {
 			for (int j = 0; j < cell[i].length; j++) {
 				cell[i][j].draw(g);
-				System.out.println("h");
 			}
 		}
 		// draws grid
 		g.setColor(Color.BLACK);
 		g.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
-		
-		
+
 	}
 
 	// advances world one step
@@ -113,9 +111,10 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 	// It returns an int of 8 or less based on how many
 	// living neighbors there are of the
 	// cell identified by x and y
-	int livingNum = 0;
+	
 
 	public int getLivingNeighbors(int x, int y) {
+		int livingNum = 0;
 		if (x > 0 && y > 0) {
 			if (cell[x][y].isAlive == true) {
 				livingNum += 1;
@@ -187,8 +186,7 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 		// 10. Use e.getX() and e.getY() to determine
 		// which cell is clicked. Then toggle
 		// the isAlive variable for that cell.
-		e.getX();
-		e.getY();
+		
 		cell[e.getX()][e.getY()].isAlive = !cell[e.getX()][e.getY()].isAlive;
 		repaint();
 	}
