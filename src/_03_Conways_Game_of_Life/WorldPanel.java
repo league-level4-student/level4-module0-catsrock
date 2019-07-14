@@ -129,42 +129,40 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 				livingNum += 1;
 			}
 		}
-		if (x + 1 < cellsPerRow - 1 && y - 1 > 0) {
+		if (x < cellsPerRow - 1 && y > 0) {
 			if (cell[x + 1][y - 1].isAlive == true) {
 				livingNum += 1;
 			}
 		}
-		if (x - 1 > 0) {
+		if (x > 0) {
 			if (cell[x - 1][y].isAlive == true) {
 				livingNum += 1;
 			}
 		}
-		if (x + 1 < cellsPerRow - 1) {
+			if (cell[x][y].isAlive == true) {
+				livingNum += 1;
+			}
+		if (x < cellsPerRow - 1) {
 			if (cell[x + 1][y].isAlive == true) {
 				livingNum += 1;
 			}
 		}
-		if (x + 1 < cellsPerRow - 1 && y + 1 < cell.length - 1) {
+		if (x < cellsPerRow - 1 && y < cell.length - 1) {
 			if (cell[x + 1][y + 1].isAlive == true) {
 				livingNum += 1;
 			}
 		}
-		if (x - 1 > 0 && y + 1 < cell.length - 1) {
-			if (cell[x - 1][y + 1].isAlive == true) {
-				livingNum += 1;
-			}
-		}
-		if (y + 1 < cell.length - 1) {
+		if (y < cell.length - 1) {
 			if (cell[x][y + 1].isAlive == true) {
 				livingNum += 1;
 			}
 		}
-		if (cell[x][y].isAlive == true) {
-			livingNum += 1;
+		if (x > 0 && y < cell.length - 1) {
+			if (cell[x - 1][y + 1].isAlive == true) {
+				livingNum += 1;
+			}
 		}
-		
-			System.out.println(livingNum);
-		
+
 		return livingNum;
 	}
 
@@ -190,7 +188,8 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 		// 10. Use e.getX() and e.getY() to determine
 		// which cell is clicked. Then toggle
 		// the isAlive variable for that cell.
-		cell[e.getX() / cellSize][e.getY() / cellSize].isAlive = !cell[e.getX() / cellSize][e.getY() / cellSize].isAlive;
+		cell[e.getX() / cellSize][e.getY()
+				/ cellSize].isAlive = !cell[e.getX() / cellSize][e.getY() / cellSize].isAlive;
 		repaint();
 	}
 
