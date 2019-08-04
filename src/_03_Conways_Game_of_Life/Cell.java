@@ -41,9 +41,8 @@ public class Cell implements Drawable {
 				isAlive = true;
 			}
 		}
-		
-			System.out.println(numNeighbors);
 
+		// System.out.println(numNeighbors);
 
 	}
 

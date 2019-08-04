@@ -106,6 +106,9 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 		for (int k = 0; k < livingNeighbors.length; k++) {
 			for (int k2 = 0; k2 < livingNeighbors[k].length; k2++) {
 				cell[k][k2].liveOrDie(livingNeighbors[k][k2]);
+				if(cell[k][k2].isAlive) {
+				System.out.println(k + " "+k2);
+				}
 			}
 		}
 
@@ -139,9 +142,6 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 				livingNum += 1;
 			}
 		}
-			if (cell[x][y].isAlive == true) {
-				livingNum += 1;
-			}
 		if (x < cellsPerRow - 1) {
 			if (cell[x + 1][y].isAlive == true) {
 				livingNum += 1;
@@ -162,7 +162,10 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 				livingNum += 1;
 			}
 		}
-
+		if (livingNum>0) {
+			System.out.println(livingNum);
+		}
+		
 		return livingNum;
 	}
 
