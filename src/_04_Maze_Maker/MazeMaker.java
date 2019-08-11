@@ -15,7 +15,8 @@ public class MazeMaker{
 	private static Random randGen = new Random();
 	private static Stack<Cell> uncheckedCells = new Stack<Cell>();
 	
-	
+	public static Cell startCell;
+	public static Random cell=new Random();
 	public static Maze generateMaze(int w, int h){
 		width = w;
 		height = h;
@@ -23,9 +24,11 @@ public class MazeMaker{
 		
 		//4. select a random cell to start
 		
+		startCell=new Cell(cell.nextInt(801), cell.nextInt(801));
+		
 		
 		//5. call selectNextPath method with the randomly selected cell
-		
+		selectNextPath(startCell);
 		
 		return maze;
 	}
@@ -33,11 +36,15 @@ public class MazeMaker{
 	//6. Complete the selectNextPathMethod
 	private static void selectNextPath(Cell currentCell) {
 		//A. mark cell as visited
-
+		currentCell.setBeenVisited(true);
 		//B. check for unvisited neighbors using the cell
+		ArrayList<Cell>unvisited=getUnvisitedNeighbors(currentCell);
 		
 		//C. if has unvisited neighbors,
-		
+		if (unvisited.size()>0) {
+			cell.nextInt(unvisited.size());
+			
+		}
 			//C1. select one at random.
 			
 			//C2. push it to the stack

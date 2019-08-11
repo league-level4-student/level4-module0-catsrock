@@ -16,13 +16,15 @@ In the MazeMaker class, complete the generateMaze method, selectNextPath method,
 
 <h5>
 getUnvisitedNeighbors takes in a cell. It returns all the neighbors of the cell who have NOT yet been visited as an ArrayList.<br><br>
-removeWalls takes in two cells. It then figures out the relationship between the two cells and sets their shared walls to false. For example, If cell1 is directly above cell2, the removeWalls will set cell1's south wall to false and set cell2's north wall to false. <br><br>
+removeWalls takes in two cells. It then figures out the relationship between the two cells and sets their shared walls to false. For example, 
+If cell1 is directly above cell2, the removeWalls will set cell1's south wall to false and set cell2's north wall to false. <br><br>
 selectNextPath is a recursive method that uses the depth first search alogorithm to determine which walls to remove.<br><br>
 generateMaze will create a maze with the given dimensions, select a cell at random, and call the selectNextPath method using that random cell.
 </h5>
   
 <h4>
-When the maze maker is generating correct mazes, pick a random cell along the border and remove its exterior wall. This will be the starting point. Then select a random cell along the opposite wall and remove its exterior wall. This will be the finish line.
+When the maze maker is generating correct mazes, pick a random cell along the border and remove its exterior wall. This will be the starting point. 
+Then select a random cell along the opposite wall and remove its exterior wall. This will be the finish line.
 </h4>
 <img src="https://github.com/League-level4/League-level4.github.io/blob/master/maze_with_exit.png?raw=true" width="300" height="300">
 </html>

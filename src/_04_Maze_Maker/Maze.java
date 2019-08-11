@@ -35,7 +35,7 @@ maze=new Maze[width][height];
 	
 	//4b. This method returns the selected cell.
 	public Cell getCell(int x, int y){
-		return  null;
+		return MazeMaker.startCell;
 	}
 
 	public int getWidth() {
