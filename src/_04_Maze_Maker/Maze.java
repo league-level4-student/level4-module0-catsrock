@@ -3,6 +3,7 @@ import java.awt.Graphics;
 
 public class Maze {
 	//1. Create a 2D array of cells. Don't initialize it.
+	Cell[][] cells;
 	Maze[][] maze;
 	private int width;
 	private int height;
@@ -12,12 +13,12 @@ public class Maze {
 		this.height = h;
 
 		//2. Initialize the cells using the width and height variables
-maze=new Maze[width][height];
+cells=new Cell[width][height];
 		//3. Iterated through each cell and initialize it
 		//   using i and j as the location
-		for (int i = 0; i < maze.length; i++) {
-			for (int j = 0; j < maze[i].length; j++) {
-				maze[i][j]=new Maze(i, j);
+		for (int i = 0; i < cells.length; i++) {
+			for (int j = 0; j < cells[i].length; j++) {
+				cells[i][j]=new Cell(i, j);
 			}
 			
 		}
@@ -25,9 +26,9 @@ maze=new Maze[width][height];
 
 	//4. This method iterates through the cells and draws them
 	public void draw(Graphics g) {
-		for (int i = 0; i < maze.length; i++) {
-			for (int j = 0; j < maze[i].length; j++) {
-				maze[i][j].draw(g);
+		for (int i = 0; i < cells.length; i++) {
+			for (int j = 0; j < cells[i].length; j++) {
+				cells[i][j].draw(g);
 			}
 			
 		}
