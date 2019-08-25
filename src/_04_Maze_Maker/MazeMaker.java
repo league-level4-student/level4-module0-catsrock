@@ -17,8 +17,12 @@ public class MazeMaker{
 	
 	public static Cell startCell;
 	public static Random cell=new Random();
+	
 	public static int randomUnvisited;
 	public static Cell randomCell;
+
+	public static ArrayList<Cell>unvisited;
+	
 	public static Maze generateMaze(int w, int h){
 		width = w;
 		height = h;
@@ -26,8 +30,7 @@ public class MazeMaker{
 		
 		//4. select a random cell to start
 		
-		startCell=new Cell(cell.nextInt(801), cell.nextInt(801));
-		
+		startCell=new Cell(cell.nextInt(MazeDisplay.WIDTH), cell.nextInt(MazeDisplay.HEIGHT));
 		
 		//5. call selectNextPath method with the randomly selected cell
 		selectNextPath(startCell);
@@ -40,7 +43,7 @@ public class MazeMaker{
 		//A. mark cell as visited
 		currentCell.setBeenVisited(true);
 		//B. check for unvisited neighbors using the cell
-		ArrayList<Cell>unvisited=getUnvisitedNeighbors(currentCell);
+		unvisited=getUnvisitedNeighbors(currentCell);
 		
 		//C. if has unvisited neighbors,
 		if (unvisited.size()>0) {
@@ -105,10 +108,32 @@ public class MazeMaker{
 	//   Any unvisited neighbor of the passed in cell gets added
 	//   to the ArrayList
 	private static ArrayList<Cell> getUnvisitedNeighbors(Cell c) {
-		if (c.getX()>0) {
-			//if(c[x-1][y]){ checking the locations of the neighbors just like in Conways' Game of Life
-			//}
+		int x=c.getX();
+		int y=c.getY();
+		System.out.println(x);
+		System.out.println(y);
+		//create new ArrayList
+		if (x>0) {
+			if (Maze.cells[x-1][y].hasBeenVisited()==false) {
+				unvisited.add(c);
+			}
 		}
-		return null;
+		if (y>0) {
+			if (Maze.cells[x][y-1].hasBeenVisited()==false) {
+				unvisited.add(c);
+			}
+		}
+		if (x<width-1) {
+			if (Maze.cells[x+1][y].hasBeenVisited()==false) {
+				unvisited.add(c);
+			}
+		}
+		if (y<height-1) {
+			if (Maze.cells[x][y+1].hasBeenVisited()==false) {
+				unvisited.add(c);
+			}
+		}
+
+		return unvisited;
 	}
 }
