@@ -8,8 +8,8 @@ import javax.swing.JPanel;
 public class MazeDisplay extends JPanel{
 	private static final long serialVersionUID = 1L;
 	
-	public static final int WIDTH = 800;
-	public static final int HEIGHT = 800;
+	public static final int FRAME_WIDTH = 800;
+	public static final int FRAME_HEIGHT = 800;
 	
 	private JFrame window;
 	
@@ -17,7 +17,7 @@ public class MazeDisplay extends JPanel{
 	
 	MazeDisplay(){
 		super();
-		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+		this.setPreferredSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT));
 		
 		window = new JFrame();
 		

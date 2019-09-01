@@ -10,7 +10,6 @@ public class Maze {
 	public Maze(int w, int h) {
 		this.width = w;
 		this.height = h;
-		System.out.println(width+" "+height);
 		//2. Initialize the cells using the width and height variables
 cells=new Cell[width][height];
 		//3. Iterated through each cell and initialize it
