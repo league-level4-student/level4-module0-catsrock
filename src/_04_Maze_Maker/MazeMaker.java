@@ -45,7 +45,7 @@ public class MazeMaker{
 		//B. check for unvisited neighbors using the cell
 		
 		unvisited=getUnvisitedNeighbors(currentCell);
-		
+		System.out.println(unvisited.size());
 		//C. if has unvisited neighbors,
 		if (unvisited.size()>0) {
 			//C1. select one at random.
@@ -57,13 +57,13 @@ public class MazeMaker{
 			//C3. remove the wall between the two cells
 			removeWalls(currentCell, randomCell);
 			//C4. make the new cell the current cell and mark it as visited
-			randomCell=currentCell;
-			randomCell.setBeenVisited(true);
+			currentCell=randomCell;
+			currentCell.setBeenVisited(true);
 			//C5. call the selectNextPath method with the current cell
 			selectNextPath(randomCell);
 			}
 		//D. if all neighbors are visited
-		else if(unvisited.size()==0) {
+		if(unvisited.size()==0) {
 			
 		
 			//D1. if the stack is not empty
@@ -86,6 +86,9 @@ public class MazeMaker{
 	//   This method will check if c1 and c2 are adjacent.
 	//   If they are, the walls between them are removed.
 	private static void removeWalls(Cell c1, Cell c2) {
+		//System.out.println(c1.getX());
+		
+		
 		if (c1.getX()==c2.getX()-1) {
 			c1.setEastWall(false);
 			c2.setWestWall(false);
@@ -95,12 +98,12 @@ public class MazeMaker{
 			c2.setEastWall(false);
 		}
 		else if(c1.getY()==c2.getY()-1) {
-			c1.setNorthWall(false);
-			c2.setSouthWall(false);
-		}
-		else if(c1.getY()==c2.getY()+1) {
 			c1.setSouthWall(false);
 			c2.setNorthWall(false);
+		}
+		else if(c1.getY()==c2.getY()+1) {
+			c1.setNorthWall(false);
+			c2.setSouthWall(false);
 		}
 	}
 	
@@ -118,25 +121,25 @@ public class MazeMaker{
 		if (cellX>0) {
 			if (Maze.cells[cellX-1][cellY].hasBeenVisited()==false) {
 				
-				notVisited.add(c);
+				notVisited.add(Maze.cells[cellX-1][cellY]);
 			}
 		}
 		if (cellY>0) {
 			if (Maze.cells[cellX][cellY-1].hasBeenVisited()==false) {
 				
-				notVisited.add(c);
+				notVisited.add(Maze.cells[cellX][cellY-1]);
 			}
 		}
 		if (cellX<width-1) {
 			if (Maze.cells[cellX+1][cellY].hasBeenVisited()==false) {
 				
-				notVisited.add(c);
+				notVisited.add(Maze.cells[cellX+1][cellY]);
 			}
 		}
 		if (cellY<height-1) {
 			if (Maze.cells[cellX][cellY+1].hasBeenVisited()==false) {
 				
-				notVisited.add(c);
+				notVisited.add(Maze.cells[cellX][cellY+1]);
 			}
 		}
 		return notVisited;
